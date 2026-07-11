@@ -25,14 +25,46 @@ export function ImageUploader({
   const [dragging, setDragging] = useState(false)
 
   const handleFile = useCallback(
-    (file: File | undefined) => {
-      if (!file || !file.type.startsWith("image/")) return
-      const reader = new FileReader()
-      reader.onload = () => onSelect(reader.result as string)
-      reader.readAsDataURL(file)
-    },
-    [onSelect],
-  )
+  (file: File | undefined) => {
+    if (!file || !file.type.startsWith("image/")) return
+
+    const img = new Image()
+    const reader = new FileReader()
+
+    reader.onload = () => {
+      img.src = reader.result as string
+    }
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas")
+
+      const maxSize = 1024
+      let width = img.width
+      let height = img.height
+
+      if (width > height && width > maxSize) {
+        height = (height * maxSize) / width
+        width = maxSize
+      } else if (height > maxSize) {
+        width = (width * maxSize) / height
+        height = maxSize
+      }
+
+      canvas.width = width
+      canvas.height = height
+
+      const ctx = canvas.getContext("2d")
+      ctx?.drawImage(img, 0, 0, width, height)
+
+      const jpeg = canvas.toDataURL("image/jpeg", 0.85)
+
+      onSelect(jpeg)
+    }
+
+    reader.readAsDataURL(file)
+  },
+  [onSelect],
+)
 
   return (
     <section
