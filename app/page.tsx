@@ -81,7 +81,7 @@ export default function Page() {
 
             <div className="grid grid-cols-3 gap-3">
               {[
-                { icon: ScanSearch, label: "Detección", value: "9 categorías" },
+                { icon: ScanSearch, label: "Detección", value: "10 categorías" },
                 { icon: Sparkles, label: "Precisión", value: "Modelo IA" },
                 { icon: Recycle, label: "Consejos", value: "Ecológicos" },
               ].map((s) => (
