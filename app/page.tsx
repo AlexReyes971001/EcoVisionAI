@@ -32,7 +32,7 @@ export default function Page() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch("http://127.0.0.1:8000/classify", {
+      const res = await fetch("https://ecovisionai-689117790379.us-west1.run.app/classify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image: preview }),
