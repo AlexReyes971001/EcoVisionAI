@@ -1,0 +1,10 @@
+Basura
+Bateria
+Biologica
+Carton
+Metal
+Papel
+Plastico
+Vidrio Cafe
+Vidrio Verde
+Vidrio blanco
